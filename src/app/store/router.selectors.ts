@@ -10,33 +10,29 @@ export const selectRouter = createFeatureSelector<
     fromRouter.RouterReducerState<any>
     >('router');
 
-const {
-    selectQueryParams,    // select the current route query params
-    selectQueryParam,     // factory function to select a query param
-    selectRouteParams,    // select the current route params
-    selectRouteParam,     // factory function to select a route param
-    selectRouteData,      // select the current route data
-    selectUrl,            // select the current url
-} = fromRouter.getSelectors(selectRouter);
+export const getRouterState = createSelector(
+    selectRouter,
+    router => router && router.state
+);
+
+export const getRouterUrl = createSelector(
+    getRouterState,
+    (state) => state && state.url
+);
 
 export const getRouterParams = createSelector(
-    selectQueryParam,
-    params => params && params
+    getRouterState,
+    (state) => state && state.params
+);
+
+export const getRouterData = createSelector(
+    getRouterState,
+    (state) => state && state.data
 );
 
 export const getRouterParamsbyKey = createSelector(
     getRouterParams,
     (routerParams, key) => routerParams && routerParams[key]
-);
-
-export const getRouterUrl = createSelector(
-    selectUrl,
-    url => url && url
-);
-
-export const getRouterData = createSelector(
-    selectRouteData,
-    data => data && data
 );
 
 export const getRouterDatabyKey = createSelector(
