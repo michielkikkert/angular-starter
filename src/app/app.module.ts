@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 
@@ -26,6 +26,7 @@ import { AppComponent } from './app.component';
     imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
         AppRoutingModule,
+        BrowserTransferStateModule,
         StoreModule.forRoot(reducers, {
             runtimeChecks: { strictStateImmutability: true, strictActionImmutability: true }
         }),
